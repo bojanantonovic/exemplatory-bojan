@@ -18,8 +18,8 @@ public class Main_Solution_Bojan {
             consumer3, //
             consumer4);
 
-        for (final var toy: Data.toys()) {
-            for (final var consumer: consumers) {
+        for (final var toy : Data.toys()) {
+            for (final var consumer : consumers) {
                 consumer.accept(toy);
             }
         }
@@ -36,7 +36,7 @@ public class Main_Solution_Bojan {
 
     public static class PredicatedToyConsumer implements Consumer<Toy> {
         private final Predicate<Toy> predicate;
-        long total = 0;
+        private long total = 0;
 
         public PredicatedToyConsumer(final Predicate<Toy> predicate) {
             this.predicate = predicate;
@@ -51,13 +51,13 @@ public class Main_Solution_Bojan {
     }
 
     public static class ColorGrouper implements Consumer<Toy> {
-        final Map<Toy.Color, Integer> map = new EnumMap<>(Toy.Color.class);
+        private final Map<Toy.Color, Integer> map = new EnumMap<>(Toy.Color.class);
 
         @Override
         public void accept(final Toy toy) {
             final var color = toy.color();
             map.putIfAbsent(color, 0);
-            map.computeIfPresent(color,(c,i)->i+1);
+            map.computeIfPresent(color, (c, i) -> i + 1);
         }
     }
 }
